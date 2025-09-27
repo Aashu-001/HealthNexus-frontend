@@ -43,7 +43,7 @@ function Editdoc() {
         e.preventDefault();
         const doctorId = localStorage.getItem('editDoctorId');
         try {
-            const response = await axios.put(`http://localhost:8000/api/doctor/${doctorId}`, doctorData);
+            const response = await axios.put(`${process.env.REACT_URL}/doctor/${doctorId}`, doctorData);
             if (response.data.msg === "Success") {
                 setMessage("Doctor updated successfully!");
                 setTimeout(() => {

@@ -16,7 +16,7 @@ function Login() {
     console.log(user);
 
     if (user.role === "Doctor") {
-      const response = await axios.post('http://localhost:8000/api/doctor/log', user);
+      const response = await axios.post(`${process.env.REACT_URL}/doctor/log`, user);
       if (response.data.msg === "Success") {
         localStorage.setItem("doctor", response.data.id);
         setEmail("");
@@ -28,7 +28,7 @@ function Login() {
         setPassword("");
       }
     } else if (user.role === "Patient") {
-      const response = await axios.post('http://localhost:8000/api/patient/log', user);
+      const response = await axios.post(`${process.env.REACT_URL}/patient/log`, user);
       if (response.data.msg === "Success") {
         localStorage.setItem("patient", response.data.id);
         setEmail("");

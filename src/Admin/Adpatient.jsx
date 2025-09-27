@@ -46,7 +46,7 @@ function Adpatient() {
         const patientData = { name, email, password, altnumber, number, age, gender, bloodgrp, address };
         
         try {
-            const response = await axios.post('http://localhost:8000/api/patient', patientData);
+            const response = await axios.post(`${process.env.REACT_URL}/patient`, patientData);
             if (response.data.msg === "Success") {
                 setMessage({ text: "Patient registered successfully!", isError: false });
                 clearForm();

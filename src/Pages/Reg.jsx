@@ -17,7 +17,7 @@ function Reg() {
   async function regcode(e) {
     e.preventDefault();
     const patient = { name, email, password, altnumber, number, age, gender, bloodgrp, address };
-    const response = await axios.post('http://localhost:8000/api/patient', patient);
+    const response = await axios.post(`${process.env.REACT_URL}/patient`, patient);
     console.log(response);
     if (response.data.msg === "Success") {
       window.alert("Patient Registration Successful");

@@ -19,7 +19,7 @@ function Pappointment() {
                 navigate('/login');
                 return;
             }
-            const response = await axios.get(`http://localhost:8000/api/app/p/${patientId}`);
+            const response = await axios.get(`${process.env.REACT_URL}/app/p/${patientId}`);
             if (response.data.msg === "Success") {
                 setAppointments(response.data.value);
             }

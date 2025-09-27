@@ -20,7 +20,7 @@ function Adlogin() {
     try {
       const admin = { email, password };
       const response = await axios.post(
-        'http://localhost:8000/api/admin/log',
+        `${process.env.REACT_URL}/admin/log`,
         admin
       );
 

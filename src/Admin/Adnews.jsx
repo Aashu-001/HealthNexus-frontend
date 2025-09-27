@@ -31,7 +31,7 @@ function Adnews() {
         const newsData = { title, desc };
         
         try {
-            const response = await axios.post('http://localhost:8000/api/news', newsData);
+            const response = await axios.post(`${process.env.REACT_URL}/news`, newsData);
             if (response.data.msg === "Success") {
                 setMessage({ text: "News added successfully!", isError: false });
                 clearForm();

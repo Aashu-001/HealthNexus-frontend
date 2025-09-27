@@ -22,7 +22,7 @@ function Editpatient() {
         } else {
             const getPatientData = async () => {
                 try {
-                    const response = await axios.get(`http://localhost:8000/api/patient/${patientId}`);
+                    const response = await axios.get(`${process.env.REACT_URL}/patient/${patientId}`);
                     if (response.data.msg === "Success") {
                         setPatientData(response.data.value);
                     }
@@ -43,7 +43,7 @@ function Editpatient() {
         e.preventDefault();
         const patientId = localStorage.getItem('editPatientId');
         try {
-            const response = await axios.put(`http://localhost:8000/api/patient/${patientId}`, patientData);
+            const response = await axios.put(`${process.env.REACT_URL}/patient/${patientId}`, patientData);
             if (response.data.msg === "Success") {
                 setMessage("Patient updated successfully!");
                 setTimeout(() => {

@@ -19,7 +19,7 @@ function Dcanapp() {
                 navigate('/login');
                 return;
             }
-            const response = await axios.get(`http://localhost:8000/api/app/d/${doctorId}`);
+            const response = await axios.get(`${process.env.REACT_URL}/app/d/${doctorId}`);
             if (response.data.msg === "Success") {
                 const cancelled = response.data.value.filter(app => app.status === "cancelled");
                 setAppointments(cancelled);

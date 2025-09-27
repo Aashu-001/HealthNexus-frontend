@@ -21,7 +21,7 @@ function Viewapp() {
         const fetchAppointments = async () => {
             try {
                 // You'll need to create this API endpoint in your backend
-                const response = await axios.get('http://localhost:8000/api/app/all');
+                const response = await axios.get(`${process.env.REACT_URL}/app/all`);
                 if (response.data.msg === "Success") {
                     setAppointments(response.data.value);
                 }

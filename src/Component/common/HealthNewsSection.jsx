@@ -17,7 +17,7 @@ const HealthNewsSection = () => {
     const fetchNews = async () => {
       try {
         // Ensure this URL matches your running backend server's address
-        const response = await axios.get('http://localhost:8000/api/news');
+        const response = await axios.get(`${process.env.REACT_URL}/news`);
         // Display the latest 3 news articles
         setNews(response.data.value.slice(0, 3));
       } catch (error) {

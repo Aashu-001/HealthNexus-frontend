@@ -14,7 +14,7 @@ function Viewdoc() {
     const getDoctors = useCallback(async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:8000/api/doctor');
+            const response = await axios.get(`${process.env.REACT_URL}/doctor`);
             if (response.data.msg === "Success") {
                 setDoctors(response.data.value);
             }
@@ -38,7 +38,7 @@ function Viewdoc() {
         // Add a confirmation step to prevent accidental deletion
         if (window.confirm("Are you sure you want to delete this doctor?")) {
             try {
-                const response = await axios.delete(`http://localhost:8000/api/doctor/${id}`);
+                const response = await axios.delete(`${process.env.REACT_URL}/doctor/${id}`);
                 if (response.data.msg === "Success") {
                     setMessage("Doctor deleted successfully.");
                     getDoctors(); // Refresh the list

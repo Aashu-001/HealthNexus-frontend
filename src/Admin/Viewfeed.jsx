@@ -14,7 +14,7 @@ function Viewfeed() {
         setLoading(true);
         try {
             // NOTE: You will need to create this API endpoint in your backend
-            const response = await axios.get('http://localhost:8000/api/feedback');
+            const response = await axios.get(`${process.env.REACT_URL}/feedback`);
             if (response.data.msg === "Success") {
                 setFeedback(response.data.value);
             }

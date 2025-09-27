@@ -21,7 +21,7 @@ function Dconapp() {
                 navigate('/login');
                 return;
             }
-            const response = await axios.get(`http://localhost:8000/api/app/d/${doctorId}`);
+            const response = await axios.get(`${process.env.REACT_URL}/app/d/${doctorId}`);
             if (response.data.msg === "Success") {
                 const confirmed = response.data.value.filter(app => app.status === "confirmed");
                 setAppointments(confirmed);
@@ -40,7 +40,7 @@ function Dconapp() {
     const handleMarkAsCompleted = async (id) => {
         // ... (logic remains the same)
         try {
-            const response = await axios.put(`http://localhost:8000/api/app/${id}`, { "status": "completed" });
+            const response = await axios.put(`${process.env.REACT_URL}/app/${id}`, { "status": "completed" });
             if (response.data.msg === "Success") {
                 setMessage("Appointment marked as completed successfully.");
                 getConfirmedAppointments(); // Refresh the list

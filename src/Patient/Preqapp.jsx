@@ -33,7 +33,7 @@ function Preqapp() {
 
         const getDoctors = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/doctor');
+                const response = await axios.get(`${process.env.REACT_URL}/doctor`);
                 if (response.data.msg === "Success") {
                     setDoctors(response.data.value);
                     setFilteredDoctors(response.data.value);
@@ -74,7 +74,7 @@ function Preqapp() {
         const appointmentData = { pid, did: doctorId, date, slot, desc };
         
         try {
-            const response = await axios.post('http://localhost:8000/api/app', appointmentData);
+            const response = await axios.post(`${process.env.REACT_URL}/app`, appointmentData);
             if (response.data.msg === "Success") {
                 setMessage({ text: "Appointment request sent successfully!", isError: false });
                 clearForm();

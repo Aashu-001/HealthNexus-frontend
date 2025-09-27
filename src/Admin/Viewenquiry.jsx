@@ -13,7 +13,7 @@ function Viewenquiry() {
         setLoading(true);
         try {
             // NOTE: You will need to create this API endpoint in your backend
-            const response = await axios.get('http://localhost:8000/api/enquiry');
+            const response = await axios.get(`${process.env.REACT_URL}/enquiry`);
             if (response.data.msg === "Success") {
                 setEnquiries(response.data.value);
             }

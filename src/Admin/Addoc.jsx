@@ -45,7 +45,7 @@ function Addoc() {
         const doctorData = { name, email, gender, "number": mobile, password, qua, exp, spe, address };
         
         try {
-            const response = await axios.post(`${process.env.REACT_URL}/doctor`, doctorData);
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/doctor`, doctorData);
             if (response.data.msg === "Success") {
                 setMessage({ text: "Doctor added successfully!", isError: false });
                 clearForm();

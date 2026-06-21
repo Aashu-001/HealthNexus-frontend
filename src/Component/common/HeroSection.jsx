@@ -3,14 +3,12 @@ import { Link } from 'react-router-dom';
 
 function HeroSection() {
   return (
-    // Main container with a background image
     <section 
       id="hero" 
-      className="relative bg-cover bg-center text-white" 
-      style={{ backgroundImage: "url('http://googleusercontent.com/image_collection/image_retrieval/1046300482123186188_0')" }}
+      className="relative bg-gradient-to-br from-emerald-800 via-teal-700 to-green-900 text-white"
     >
-      {/* Semi-transparent overlay for text readability */}
-      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+      {/* Decorative overlay pattern */}
+      <div className="absolute inset-0 opacity-10" style={{backgroundImage: "radial-gradient(circle at 25% 50%, white 1px, transparent 1px), radial-gradient(circle at 75% 50%, white 1px, transparent 1px)", backgroundSize: "60px 60px"}}></div>
 
       {/* Content container */}
       <div className="relative container mx-auto px-6 py-24 text-center">
@@ -22,13 +20,13 @@ function HeroSection() {
         </p>
         <Link 
           to="/preqapp"
-          className="inline-block py-3 px-8 bg-green-600 font-bold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300"
+          className="inline-block py-3 px-8 bg-white text-emerald-800 font-bold rounded-lg shadow-md hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300"
         >
           Book an Appointment
         </Link>
       </div>
     </section>
   );
-};
+}
 
 export default HeroSection;

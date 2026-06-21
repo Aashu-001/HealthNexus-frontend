@@ -46,16 +46,16 @@ function Adpatient() {
         const patientData = { name, email, password, altnumber, number, age, gender, bloodgrp, address };
         
         try {
-            const response = await axios.post(`${process.env.REACT_URL}/patient`, patientData);
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/patient`, patientData);
             if (response.data.msg === "Success") {
                 setMessage({ text: "Patient registered successfully!", isError: false });
                 clearForm();
             } else {
-                setMessage({ text: "Something went wrong. Please try again.", isError: true });
+                setMessage({ text: response.data.msg || "Something went wrong. Please try again.", isError: true });
             }
         } catch (error) {
             console.error("Error adding patient:", error);
-            setMessage({ text: "An error occurred. Please try again.", isError: true });
+            setMessage({ text: error.response?.data?.msg || "An error occurred. Please try again.", isError: true });
         }
     };
 

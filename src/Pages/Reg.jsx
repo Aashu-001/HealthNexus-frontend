@@ -2,8 +2,10 @@
 
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Reg() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [altnumber, setAltnumber] = useState("");
@@ -17,21 +19,26 @@ function Reg() {
   async function regcode(e) {
     e.preventDefault();
     const patient = { name, email, password, altnumber, number, age, gender, bloodgrp, address };
-    const response = await axios.post(`${process.env.REACT_URL}/patient`, patient);
-    console.log(response);
-    if (response.data.msg === "Success") {
-      window.alert("Patient Registration Successful");
-      setName("");
-      setEmail("");
-      setNumber("");
-      setAltnumber("");
-      setPassword("");
-      setGender("");
-      setAge("");
-      setBloodgrp("");
-      setAddress("");
-    } else {
-      window.alert("Something Went Wrong");
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/patient`, patient);
+      if (response.data.msg === "Success") {
+        window.alert("Patient Registration Successful");
+        setName("");
+        setEmail("");
+        setNumber("");
+        setAltnumber("");
+        setPassword("");
+        setGender("");
+        setAge("");
+        setBloodgrp("");
+        setAddress("");
+        navigate("/");
+      } else {
+        window.alert(response.data.msg || "Something went wrong");
+        setPassword("");
+      }
+    } catch (error) {
+      window.alert(error.response?.data?.msg || "Something went wrong");
       setPassword("");
     }
   }
@@ -48,12 +55,12 @@ function Reg() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block text-gray-700 mb-2 font-medium">Name</label>
-            <input type="text" value={name} onChange={(e)=>setName(e.target.value)} placeholder="Enter full name" className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+            <input required type="text" value={name} onChange={(e)=>setName(e.target.value)} placeholder="Enter full name" className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400" />
           </div>
 
           <div>
             <label className="block text-gray-700 mb-2 font-medium">Number</label>
-            <input type="number" value={number} onChange={(e)=>setNumber(e.target.value)} placeholder="Enter phone number" className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+            <input required type="number" value={number} onChange={(e)=>setNumber(e.target.value)} placeholder="Enter phone number" className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400" />
           </div>
 
           <div>
@@ -63,22 +70,22 @@ function Reg() {
 
           <div>
             <label className="block text-gray-700 mb-2 font-medium">Email</label>
-            <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Enter your email" className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+            <input required type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Enter your email" className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400" />
           </div>
 
           <div>
             <label className="block text-gray-700 mb-2 font-medium">Password</label>
-            <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Enter your password" className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+            <input required type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Enter your password" className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400" />
           </div>
 
           <div>
             <label className="block text-gray-700 mb-2 font-medium">Age</label>
-            <input type="number" value={age} onChange={(e)=>setAge(e.target.value)} placeholder="Enter your age" className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+            <input required type="number" value={age} onChange={(e)=>setAge(e.target.value)} placeholder="Enter your age" className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400" />
           </div>
 
           <div>
             <label className="block text-gray-700 mb-2 font-medium">Gender</label>
-            <select value={gender} onChange={(e)=>setGender(e.target.value)} className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400">
+            <select required value={gender} onChange={(e)=>setGender(e.target.value)} className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400">
               <option value="">--Select Gender--</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
@@ -87,7 +94,7 @@ function Reg() {
 
           <div>
             <label className="block text-gray-700 mb-2 font-medium">Blood Group</label>
-            <select value={bloodgrp} onChange={(e)=>setBloodgrp(e.target.value)} className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400">
+            <select required value={bloodgrp} onChange={(e)=>setBloodgrp(e.target.value)} className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400">
               <option value="">--Select Blood Group--</option>
               <option value="A+">A+</option>
               <option value="A-">A-</option>
@@ -103,7 +110,7 @@ function Reg() {
 
         <div>
           <label className="block text-gray-700 mb-2 font-medium">Address</label>
-          <input type="text" value={address} onChange={(e)=>setAddress(e.target.value)} placeholder="Enter your address" className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+          <input required type="text" value={address} onChange={(e)=>setAddress(e.target.value)} placeholder="Enter your address" className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-400" />
         </div>
 
         <button type="submit" className="w-full bg-emerald-600 text-white py-3 rounded-xl font-semibold hover:bg-emerald-700 active:scale-95 transition duration-200">

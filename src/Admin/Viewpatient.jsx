@@ -15,7 +15,7 @@ function Viewpatient() {
     const getPatients = useCallback(async () => {
         setLoading(true);
         try {
-            const response = await axios.get(`${process.env.REACT_URL}/patient`);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/patient`);
             if (response.data.msg === "Success") {
                 setPatients(response.data.value);
             }
@@ -39,7 +39,7 @@ function Viewpatient() {
         // Add a confirmation step to prevent accidental deletion
         if (window.confirm("Are you sure you want to delete this patient?")) {
             try {
-                const response = await axios.delete(`${process.env.REACT_URL}/patient/${id}`);
+                const response = await axios.delete(`${import.meta.env.VITE_API_URL}/patient/${id}`);
                 if (response.data.msg === "Success") {
                     setMessage("Patient deleted successfully.");
                     getPatients(); // Refresh the list

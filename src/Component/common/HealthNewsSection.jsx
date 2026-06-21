@@ -4,7 +4,7 @@ import axios from 'axios';
 const NewsCard = ({ title, content, date }) => (
   <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
     <h3 className="text-xl font-semibold text-gray-800 mb-2">{title}</h3>
-    <p className="text-gray-600 mb-4">{content.substring(0, 100)}...</p>
+    <p className="text-gray-600 mb-4">{(content || '').substring(0, 100)}...</p>
     <p className="text-sm text-gray-400">{new Date(date).toLocaleDateString()}</p>
   </div>
 );
@@ -17,9 +17,9 @@ const HealthNewsSection = () => {
     const fetchNews = async () => {
       try {
         // Ensure this URL matches your running backend server's address
-        const response = await axios.get(`${process.env.REACT_URL}/news`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/news`);
         // Display the latest 3 news articles
-        setNews(response.data.value.slice(0, 3));
+        setNews(response.data.value?.slice(0, 3) || []);
       } catch (error) {
         console.error("Error fetching news:", error);
       } finally {

@@ -19,7 +19,7 @@ function Dcomapp() {
                 navigate('/login');
                 return;
             }
-            const response = await axios.get(`${process.env.REACT_URL}/app/d/${doctorId}`);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/app/d/${doctorId}`);
             if (response.data.msg === "Success") {
                 const completed = response.data.value.filter(app => app.status === "completed");
                 setAppointments(completed);

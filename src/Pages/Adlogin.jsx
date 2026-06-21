@@ -20,14 +20,14 @@ function Adlogin() {
     try {
       const admin = { email, password };
       const response = await axios.post(
-        `${process.env.REACT_URL}/admin/log`,
+        `${import.meta.env.VITE_API_URL}/admin/log`,
         admin
       );
 
       if (response.data.msg === 'Success') {
         
         localStorage.setItem('admin', 'true'); // Use a simple flag
-        navigate('/Admindash');
+        navigate('/admindash');
       } else {
         setError(response.data.msg || 'Invalid credentials. Please try again.');
         setPassword('');

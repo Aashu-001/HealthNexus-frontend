@@ -22,7 +22,7 @@ function Editdoc() {
         } else {
             const getDoctorData = async () => {
                 try {
-                    const response = await axios.get(`http://localhost:8000/api/doctor/${doctorId}`);
+                    const response = await axios.get(`${import.meta.env.VITE_API_URL}/doctor/${doctorId}`);
                     if (response.data.msg === "Success") {
                         setDoctorData(response.data.value);
                     }
@@ -43,7 +43,7 @@ function Editdoc() {
         e.preventDefault();
         const doctorId = localStorage.getItem('editDoctorId');
         try {
-            const response = await axios.put(`${process.env.REACT_URL}/doctor/${doctorId}`, doctorData);
+            const response = await axios.put(`${import.meta.env.VITE_API_URL}/doctor/${doctorId}`, doctorData);
             if (response.data.msg === "Success") {
                 setMessage("Doctor updated successfully!");
                 setTimeout(() => {

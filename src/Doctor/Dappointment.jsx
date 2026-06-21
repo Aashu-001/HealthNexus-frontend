@@ -20,7 +20,7 @@ function Dappointment() {
                 navigate('/login');
                 return;
             }
-            const response = await axios.get(`${process.env.REACT_URL}/app/d/${doctorId}`);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/app/d/${doctorId}`);
             if (response.data.msg === "Success") {
                 const pending = response.data.value.filter(app => app.status === "pending");
                 setAppointments(pending);
@@ -39,7 +39,7 @@ function Dappointment() {
     
     const handleUpdateStatus = async (id, status) => {
         try {
-            const response = await axios.put(`${process.env.REACT_URL}/app/${id}`, { status });
+            const response = await axios.put(`${import.meta.env.VITE_API_URL}/app/${id}`, { status });
             if (response.data.msg === "Success") {
                 // Refresh the list after a successful update
                 getPendingAppointments();

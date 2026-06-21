@@ -1,15 +1,23 @@
-
-
 import React from 'react';
 import { Link } from 'react-router-dom';
+
+// Map color names to explicit Tailwind classes (dynamic classes like `text-${color}-600` are purged by Tailwind)
+const colorMap = {
+    yellow: 'text-yellow-600',
+    green: 'text-green-600',
+    blue: 'text-blue-600',
+    red: 'text-red-600',
+    purple: 'text-purple-600',
+    teal: 'text-teal-600',
+};
 
 const ServiceCard = ({ to, icon, title, description, color }) => (
     <Link 
         to={to} 
         className="block p-6 bg-white rounded-lg shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
     >
-        <div className={`text-4xl mb-4 text-${color}-600`}>{icon}</div>
-        <h3 className={`text-xl font-semibold text-gray-800 mb-2`}>{title}</h3>
+        <div className={`text-4xl mb-4 ${colorMap[color] || 'text-gray-600'}`}>{icon}</div>
+        <h3 className="text-xl font-semibold text-gray-800 mb-2">{title}</h3>
         <p className="text-gray-600">{description}</p>
     </Link>
 );
@@ -62,7 +70,6 @@ function ServicesSection() {
                     </div>
 
                     {/* == Vertical Partition Line == */}
-                    {/* This div acts as the visual separator. It's hidden on small screens. */}
                     <div className="hidden lg:block w-px h-full bg-gray-200 self-stretch mx-auto"></div>
 
                     {/* == For Patients Section == */}
